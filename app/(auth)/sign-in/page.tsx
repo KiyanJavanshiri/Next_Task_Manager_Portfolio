@@ -2,7 +2,7 @@
 import React, { useActionState } from "react";
 import z from "zod";
 import { authScheme } from "@/utils/authValidation";
-import { actionLoginAuth } from "@/utils/actions";
+import { actionLoginAuth } from "@/utils/actions/auth/auth";
 import FormInput from "@/components/Input/FormInput";
 import Button from "@/components/Button/Button";
 import Link from "next/link";

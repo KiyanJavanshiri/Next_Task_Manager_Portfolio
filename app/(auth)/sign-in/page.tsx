@@ -44,7 +44,7 @@ const SignInPage = () => {
             id="login-input"
             label="Login"
             type="text"
-            error={state?.errors?.email && state.errors.email[0]}
+            error={state?.errors?.login && state.errors.login[0]}
           />
           <FormInput<LoginFormFields>
             name="password"
@@ -59,7 +59,7 @@ const SignInPage = () => {
             className="p-2 mt-4 w-full rounded-[10px] bg-black text-center text-base text-white leading-[143%] font-medium disabled:bg-gray-600"
             disabled={isPending}
           >
-            {isPending ? "Submiting..." : "Sign In"}
+            {isPending ? "Submitting..." : "Sign In"}
           </Button>
         </div>
         <p className="mt-4 text-sm leading-[143%] font-normal text-gray-400">

@@ -28,7 +28,7 @@ export const authScheme = z.object({
       },
     })
     .trim()
-    .min(10, "Too short login")
+    .min(6, "Too short login")
     .max(20, "Too long login"),
   firstName: z
     .string({
@@ -37,7 +37,7 @@ export const authScheme = z.object({
       },
     })
     .trim()
-    .min(10, "Too short firstName")
+    .min(2, "Too short firstName")
     .max(20, "Too long firstName"),
   lastName: z
     .string({
@@ -46,7 +46,7 @@ export const authScheme = z.object({
       },
     })
     .trim()
-    .min(10, "Too short lastName")
+    .min(2, "Too short lastName")
     .max(20, "Too long lastName"),
 });
 

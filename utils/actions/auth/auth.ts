@@ -44,3 +44,26 @@ export const actionLoginAuth = async (state: FormState, formData: FormData) => {
   await createSession(user.id);
   redirect("/");
 };
+
+export const actionSignUpAuth = async (
+  state: FormState,
+  formData: FormData,
+) => {
+  const rawData = Object.fromEntries(formData);
+  const validationResult = z.safeParse(authScheme, rawData);
+
+  if (!validationResult.success) {
+    return {
+      errors: z.flattenError(validationResult.error).fieldErrors,
+    };
+  }
+
+  const data = validationResult.data;
+  const hashedPassword = await bcrypt.hash(data.password, 10);
+
+  await prisma.user.create({
+    data: { ...data, password: hashedPassword },
+  });
+
+  redirect("/sign-in");
+};

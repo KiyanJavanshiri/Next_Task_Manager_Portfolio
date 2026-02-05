@@ -9,7 +9,7 @@ import { createSession } from "./sessions/createSession";
 export const actionLoginAuth = async (state: FormState, formData: FormData) => {
   const rawData = Object.fromEntries(formData);
   const validationResult = z.safeParse(
-    authScheme.pick({ email: true, password: true }),
+    authScheme.pick({ login: true, password: true }),
     rawData,
   );
 
@@ -19,11 +19,11 @@ export const actionLoginAuth = async (state: FormState, formData: FormData) => {
     };
   }
 
-  const { email, password } = validationResult.data;
+  const { login, password } = validationResult.data;
 
   const user = await prisma.user.findUnique({
     where: {
-      login: email,
+      login: login,
     },
   });
 

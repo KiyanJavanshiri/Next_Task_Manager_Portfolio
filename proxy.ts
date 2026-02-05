@@ -11,21 +11,32 @@ const proxy = async (req: NextRequest) => {
   const cookie = await cookies();
   const secretKey = process.env.JWT_SECRET_KEY!;
 
+  if (isPublicRoute(pathname)) {
+    return NextResponse.next();
+  }
+
   const token = cookie.get("session")?.value;
 
+  
   if (!isPublicRoute(pathname) && !token) {
     return NextResponse.redirect(new URL("/sign-in", req.nextUrl));
   }
 
-  const payload = jwt.verify(token!, secretKey) as JwtPayload & { id?: string };
+  try {
+    const payload = jwt.verify(token!, secretKey) as JwtPayload & {
+      id?: string;
+    };
 
-  const id = payload?.id;
+    const id = payload?.id;
 
-  if (!isPublicRoute(pathname) && !id) {
+    if (!isPublicRoute(pathname) && !id) {
+      return NextResponse.redirect(new URL("/sign-in", req.nextUrl));
+    }
+
+    return NextResponse.next();
+  } catch (ex) {
     return NextResponse.redirect(new URL("/sign-in", req.nextUrl));
   }
-
-  return NextResponse.next();
 };
 
 export const config = {

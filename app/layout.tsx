@@ -19,10 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} antialiased bg-gray-50`}
-      >
+      <body className={`${inter.variable} antialiased bg-gray-50`}>
         {children}
+        <div id="modals"></div>
       </body>
     </html>
   );

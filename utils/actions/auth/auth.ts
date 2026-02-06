@@ -5,6 +5,7 @@ import z from "zod";
 import { type FormState, authScheme } from "@/utils/authValidation";
 import { redirect } from "next/navigation";
 import { createSession } from "./sessions/createSession";
+import { deleteSession } from "./sessions/deleteSession";
 
 export const actionLoginAuth = async (state: FormState, formData: FormData) => {
   const rawData = Object.fromEntries(formData);
@@ -65,5 +66,10 @@ export const actionSignUpAuth = async (
     data: { ...data, password: hashedPassword },
   });
 
+  redirect("/sign-in");
+};
+
+export const actionLogout = async () => {
+  await deleteSession();
   redirect("/sign-in");
 };

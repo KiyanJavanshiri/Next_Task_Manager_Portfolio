@@ -24,4 +24,52 @@ model User {
   avatarUrl String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  boards   Board[]       @relation("OwnerBoards")
+  memberIn BoardMember[]
+
+  tasks Task[] @relation("UserTasks")
+}
+
+model Board {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+
+  ownerId String @db.ObjectId
+  owner   User   @relation("OwnerBoards", fields: [ownerId], references: [id])
+
+  members BoardMember[]
+
+  tasks Task[]
+
+  createdAt DateTime @default(now())
+}
+
+model BoardMember {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userId String @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+
+  boardId String @db.ObjectId
+  board   Board  @relation(fields: [boardId], references: [id])
+
+  joinedAt DateTime @default(now())
+
+  @@unique([userId, boardId]) 
+}
+
+model Task {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String?
+
+  boardId String @db.ObjectId
+  board   Board  @relation(fields: [boardId], references: [id])
+
+  assigneeId String? @db.ObjectId
+  assignee   User?   @relation("UserTasks", fields: [assigneeId], references: [id])
+
+  status    String   @default("todo")
+  createdAt DateTime @default(now())
 }

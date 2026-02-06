@@ -1,13 +1,19 @@
-import SideBar from "@/compositions/SideBar";
 import { type ReactNode } from "react";
+import SideBar from "@/compositions/SideBar";
+import Header from "@/compositions/Header";
+import InnerContainer from "@/layout/InnerContainer";
 
 const PrivateRootLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="">
+    <div className="flex">
       <SideBar />
-      <header></header>
-      <main>{children}</main>
-      <footer></footer>
+      <div className="flex-1">
+        <Header />
+        <main>
+          <InnerContainer>{children}</InnerContainer>
+        </main>
+        <footer></footer>
+      </div>
     </div>
   );
 };

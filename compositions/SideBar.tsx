@@ -10,7 +10,7 @@ import Button from "@/components/Button/Button";
 const SideBar = () => {
   const pathname = usePathname();
   return (
-    <aside className="fixed min-h-screen bg-white border-r border-r-gray-200 flex flex-col justify-between min-w-55">
+    <aside className="min-h-screen bg-white border-r border-r-gray-200 hidden lg:flex flex-col justify-between max-w-55 pb-4">
       <div className="">
         <div className="px-6 py-4 border-b border-gray-200">
           <Logo />
@@ -20,7 +20,7 @@ const SideBar = () => {
             {PATHS.map(({ title, path, Icon }, i) => (
               <li key={i}>
                 <Link
-                  className={`flex justify-start items-center gap-x-3 py-2 px-6 ${pathname === path ? "bg-gray-200" : ""} rounded-r-sm`}
+                  className={`flex justify-start items-center gap-x-3 py-2 px-6 ${pathname === path ? "bg-gray-200" : ""} rounded-r-sm hover:bg-gray-300 transition-colors duration-100 ease-in-out`}
                   href={path}
                 >
                   <Icon className="w-4 h-4" />
@@ -33,10 +33,13 @@ const SideBar = () => {
           </ul>
         </nav>
       </div>
-      <form action={actionLogout}>
-        <Button className="">
-          <span>Logout</span>
-          <MdOutlineLogout />
+      <form action={actionLogout} className="pr-4">
+        <Button
+          type="submit"
+          className="px-6 py-2 flex w-full justify-start items-center gap-x-3 hover:bg-gray-300 transition-colors duration-100 ease-in-out rounded-r-sm"
+        >
+          <MdOutlineLogout className="w-4 h-4 text-red-500" />
+          <span className="text-black font-normal leading-[143%]">Logout</span>
         </Button>
       </form>
     </aside>

@@ -27,7 +27,7 @@ const SearchBar = () => {
   return (
     <form
       onSubmit={handleSearch}
-      className="flex justify-start items-stretch min-w-100"
+      className="justify-start items-stretch min-w-100 hidden lg:flex"
     >
       <input
         className="w-full px-4 py-2 bg-white border border-gray-300 rounded-l-sm outline-none text-sm text-black leading-[143%] font-normal placeholder:text-gray-400 focus:border-black"

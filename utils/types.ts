@@ -1,7 +1,2 @@
-export interface IAuthFormFields {
-    email: string;
-    password: string;
-    login: string;
-    firstName: string;
-    lastName: string;
-}
+import { actionGetUsersBoards } from "./actions/user/userActions"
+export type BoardWithRelations = Awaited<ReturnType<typeof actionGetUsersBoards>>[0]

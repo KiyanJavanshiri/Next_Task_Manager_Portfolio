@@ -2,6 +2,7 @@
 import type { TBoardState } from "@/compositions/BoardCreateModal";
 import prisma from "@/lib/prisma";
 import { getSession } from "../auth/sessions/getSession";
+import { revalidatePath } from "next/cache";
 
 export const createBoard = async (state: TBoardState, formData: FormData) => {
   const data = Object.fromEntries(formData) as {
@@ -25,11 +26,18 @@ export const createBoard = async (state: TBoardState, formData: FormData) => {
 
   const userId = await getSession();
 
-  prisma.$transaction(async (t) => {
-    try {
-
-    } catch (ex) {
-      // return t.rollback()
-    }
+  await prisma.board.create({
+    data: {
+      title: data.boardName,
+      backgroundColor: data.background,
+      ownerId: userId,
+      members: {
+        create: {
+          userId,
+        },
+      },
+    },
   });
+
+  revalidatePath("/boards");
 };

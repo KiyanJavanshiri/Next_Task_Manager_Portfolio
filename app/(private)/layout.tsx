@@ -7,9 +7,9 @@ const PrivateRootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="flex">
       <SideBar />
-      <div className="flex-1">
+      <div className="flex flex-col flex-1">
         <Header />
-        <main className="py-6">
+        <main className="py-6 flex-1">
           <InnerContainer>{children}</InnerContainer>
         </main>
         <footer></footer>

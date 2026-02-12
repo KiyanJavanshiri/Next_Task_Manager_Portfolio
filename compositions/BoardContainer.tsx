@@ -1,12 +1,10 @@
 import type { BoardWithRelations } from "@/utils/types";
-import {
-  actionCreateBoards,
-  actionGetUsersBoards,
-} from "@/utils/actions/user/userActions";
-import BoardItem from "@/components/BoardItem";
-import BoardCreateModal from "./BoardCreateModal";
+import { getSession } from "@/utils/actions/auth/sessions/getSession";
+import { actionGetUsersBoards } from "@/utils/actions/user/userActions";
+import BoardItem from "@/components/Board/BoardItem";
 
 const BoardContainer = async ({ search }: { search: string }) => {
+  const userId = await getSession();
   const boards: BoardWithRelations[] = await actionGetUsersBoards(search);
   console.log("boards: ", boards);
 
@@ -14,12 +12,9 @@ const BoardContainer = async ({ search }: { search: string }) => {
     <ul className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {boards.map((board) => (
         <li key={board.id}>
-          <BoardItem board={board} />
+          <BoardItem board={board} userId={userId} />
         </li>
       ))}
-      <li>
-        <BoardCreateModal />
-      </li>
       {/* <form action={actionCreateBoards}>
         <button type="submit">
 

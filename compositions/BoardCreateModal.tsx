@@ -23,13 +23,13 @@ const BoardCreateModal = () => {
     <>
       <div className="relative">
         <Button
-          className="flex justify-center items-center rounded-sm bg-gray-700 h-31 w-full transition-colors duration-100 ease-in-out hover:bg-gray-600 text-base text-gray-300 font-medium leading-[143%]"
+          className="inline-block px-4 py-2 rounded-sm bg-black transition-colors duration-100 ease-in-out hover:bg-gray-800 text-base text-gray-300 font-medium leading-[143%]"
           onClick={() => setIsOpen(!isOpen)}
         >
           Create a board
         </Button>
         {isOpen && (
-          <div className="absolute -top-1/2 -right-2 translate-x-full p-6 rounded-md shadow-[0_0_10px_rgba(0,0,0,10%)] bg-white min-w-70">
+          <div className="absolute top-0 -left-2 -translate-x-full p-6 rounded-md shadow-[0_0_10px_rgba(0,0,0,10%)] bg-white min-w-70 z-10">
             <Button
               className="absolute top-4 right-4 p-2 rounded-sm hover:bg-gray-200 z-10"
               onClick={() => setIsOpen(false)}

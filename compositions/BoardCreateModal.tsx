@@ -1,30 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useState, useActionState } from "react";
+import { BoardBackgroundColor } from "@/utils/types";
+import { createBoard } from "@/utils/actions/board/createBoard";
 import { RxCross2 } from "react-icons/rx";
 import { FaCheck } from "react-icons/fa6";
 import Button from "@/components/Button/Button";
 
-interface IBoardInfo {
-  title: string;
-  background: string;
-}
-
-const BACKGROUND_OPTIONS = [
-  "rgba(64, 53, 222, 100%)",
-  "rgba(138, 165, 210, 100%)",
-  "rgba(101, 182, 216, 100%)",
-  "rgba(0,0,0,100%)",
-  "rgba(30, 69, 98, 100%)",
-];
+export type TBoardState =
+  | {
+      errors: {
+        boardName?: string;
+        background?: string;
+      };
+    }
+  | undefined;
 
 const BoardCreateModal = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [boardInfo, setBoardInfo] = useState<IBoardInfo>({
-    background: BACKGROUND_OPTIONS[0],
-    title: "",
-  });
+  const [state, action] = useActionState(createBoard, undefined);
 
-  console.log("board data: ", boardInfo);
   return (
     <>
       <div className="relative">
@@ -42,7 +36,7 @@ const BoardCreateModal = () => {
             >
               <RxCross2 />
             </Button>
-            <form className="relative">
+            <form action={action} className="relative">
               <p className="text-center leading-[143%] text-black text-base font-semibold">
                 Create a board
               </p>
@@ -51,32 +45,25 @@ const BoardCreateModal = () => {
                   Board Background
                 </p>
                 <div className="flex justify-start items-center gap-2 mt-2">
-                  {BACKGROUND_OPTIONS.map((bg, i) => (
-                    <label
-                      htmlFor={`bg-${i}`}
-                      style={{ backgroundColor: bg }}
-                      className={`flex justify-center items-center w-8 h-6 rounded-sm relative`}
-                      key={i}
-                    >
-                      <input
-                        id={`bg-${i}`}
-                        type="radio"
-                        name="background"
-                        className="absolute opacity-0 inset-0 cursor-pointer"
-                        value={bg}
-                        onChange={(e) => {
-                          setBoardInfo((prev) => ({
-                            ...prev,
-                            background: e.target.value,
-                          }));
-                          console.log("im working");
-                        }}
-                      />
-                      {boardInfo.background === bg && (
+                  {Object.entries(BoardBackgroundColor).map(
+                    ([bgName, bgColor], i) => (
+                      <label
+                        htmlFor={`bg-${bgName}`}
+                        style={{ backgroundColor: bgColor }}
+                        className={`flex justify-center items-center w-8 h-6 rounded-sm relative`}
+                        key={i}
+                      >
+                        <input
+                          id={`bg-${i}`}
+                          type="radio"
+                          name="background"
+                          className="absolute opacity-0 inset-0 cursor-pointer"
+                          value={bgColor}
+                        />
                         <FaCheck className="text-white" />
-                      )}
-                    </label>
-                  ))}
+                      </label>
+                    ),
+                  )}
                 </div>
               </div>
               <fieldset>
@@ -90,11 +77,8 @@ const BoardCreateModal = () => {
                   id="board-name"
                   placeholder="Enter board name..."
                   name="boardName"
-                  onChange={(e) =>
-                    setBoardInfo((prev) => ({ ...prev, title: e.target.value }))
-                  }
-                  value={boardInfo.title}
                 />
+                {state?.errors?.boardName && <p>{state.errors.boardName}</p>}
               </fieldset>
               <Button type="submit" className="">
                 Create

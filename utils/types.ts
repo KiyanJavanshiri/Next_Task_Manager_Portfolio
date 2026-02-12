@@ -1,2 +1,13 @@
-import { actionGetUsersBoards } from "./actions/user/userActions"
-export type BoardWithRelations = Awaited<ReturnType<typeof actionGetUsersBoards>>[0]
+import { actionGetUsersBoards } from "./actions/user/userActions";
+
+export type BoardWithRelations = Awaited<
+  ReturnType<typeof actionGetUsersBoards>
+>[0];
+
+export enum BoardBackgroundColor {
+  ROYAL_BLUE = "rgba(64, 53, 222, 100%)",
+  DUSTY_BLUE = "rgba(138, 165, 210, 100%)",
+  SKY_BLUE = "rgba(101, 182, 216, 100%)",
+  BLACK = "rgba(0,0,0,100%)",
+  MIDNIGHT_BLUE = "rgba(30, 69, 98, 100%)",
+}

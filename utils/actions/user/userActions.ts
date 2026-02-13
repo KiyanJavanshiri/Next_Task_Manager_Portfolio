@@ -32,23 +32,3 @@ export const actionGetUsersBoards = async (search: string) => {
 
   return boards;
 };
-
-export const actionCreateBoards = async () => {
-  const ownerId = await getSession();
-  await prisma.boardMember.createMany({
-    data: [
-      {
-        boardId: "698b208a5f64061f9d9cde71",
-        userId: ownerId,
-      },
-      {
-        boardId: "698b208a5f64061f9d9cde72",
-        userId: ownerId,
-      },
-      {
-        boardId: "698b208a5f64061f9d9cde73",
-        userId: ownerId,
-      },
-    ],
-  });
-};

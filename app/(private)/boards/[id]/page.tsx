@@ -6,6 +6,7 @@ import { actionGetTasks } from "@/utils/actions/tasks/getTasks";
 import { actionCreateTasks } from "@/utils/actions/tasks/createTasks";
 import Button from "@/components/Button/Button";
 import TaskBoardColumn from "@/components/Tasks/TaskBoardColumn";
+import AddMemberModal from "@/compositions/AddMemberModal";
 
 const COLUMNS: IColumn[] = [
   {
@@ -37,16 +38,24 @@ const AllTasksPage = async ({
 
   return (
     <section className="">
-      <h2 className="text-3xl leading-[143%] text-black font-semibold">{title}</h2>
+      <h2 className="text-3xl leading-[143%] text-black font-semibold">
+        {title}
+      </h2>
       <div className="mt-3 flex justify-between items-center pb-4 border-b border-gray-300">
         <div className="">
           <Button className="">Board</Button>
         </div>
-        {/* <form action={actionCreateTasks}> */}
-        <Button type="submit" className="px-4 py-2 inline-block text-base text-white leading-[143%] font-medium bg-black rounded-sm hover:bg-gray-900">
-          Create new task
-        </Button>
-        {/* </form> */}
+        <div className="flex justify-center items-center gap-x-4">
+          <AddMemberModal/>
+          {/* <form action={actionCreateTasks}> */}
+          <Button
+            type="submit"
+            className="px-4 py-2 inline-block text-base text-white leading-[143%] font-medium bg-black rounded-sm hover:bg-gray-900"
+          >
+            Create new task
+          </Button>
+          {/* </form> */}
+        </div>
       </div>
       <div className="mt-6 grid grid-cols-3 gap-6">
         {COLUMNS.map((column, i) => (

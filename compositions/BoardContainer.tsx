@@ -15,12 +15,6 @@ const BoardContainer = async ({ search }: { search: string }) => {
           <BoardItem board={board} userId={userId} />
         </li>
       ))}
-      {/* <form action={actionCreateBoards}>
-        <button type="submit">
-
-        add member
-        </button>
-      </form> */}
     </ul>
   ) : (
     <p className="mt-40 text-2xl leading-[143%] text-gray-500 font-medium text-center">

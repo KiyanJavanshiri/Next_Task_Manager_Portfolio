@@ -1,4 +1,6 @@
 import { actionGetUsersBoards } from "./actions/user/userActions";
+import { Columns } from "@/lib/generated/prisma/enums";
+import type { IconType } from "react-icons";
 
 export type BoardWithRelations = Awaited<
   ReturnType<typeof actionGetUsersBoards>
@@ -10,4 +12,10 @@ export enum BoardBackgroundColor {
   SKY_BLUE = "rgba(101, 182, 216, 100%)",
   BLACK = "rgba(0,0,0,100%)",
   MIDNIGHT_BLUE = "rgba(30, 69, 98, 100%)",
+}
+
+export interface IColumn {
+  title: string;
+  Icon: IconType;
+  status: Columns;
 }

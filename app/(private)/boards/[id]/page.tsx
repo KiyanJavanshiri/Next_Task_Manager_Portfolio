@@ -6,7 +6,7 @@ import { actionGetTasks } from "@/utils/actions/tasks/getTasks";
 import { actionCreateTasks } from "@/utils/actions/tasks/createTasks";
 import Button from "@/components/Button/Button";
 import TaskBoardColumn from "@/components/Tasks/TaskBoardColumn";
-import AddMemberModal from "@/compositions/AddMemberModal";
+import AddMemberModal from "@/compositions/AddMemberModal/AddMemberModal";
 
 const COLUMNS: IColumn[] = [
   {

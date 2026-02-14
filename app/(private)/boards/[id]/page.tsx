@@ -7,6 +7,7 @@ import { actionCreateTasks } from "@/utils/actions/tasks/createTasks";
 import Button from "@/components/Button/Button";
 import TaskBoardColumn from "@/components/Tasks/TaskBoardColumn";
 import AddMemberModal from "@/compositions/AddMemberModal/AddMemberModal";
+import CreateTaskModal from "@/compositions/CreateTaskModal/CreateTaskModal";
 
 const COLUMNS: IColumn[] = [
   {
@@ -47,14 +48,7 @@ const AllTasksPage = async ({
         </div>
         <div className="flex justify-center items-center gap-x-4">
           <AddMemberModal boardId={board!.id} />
-          {/* <form action={actionCreateTasks}> */}
-          <Button
-            type="submit"
-            className="px-4 py-2 inline-block text-base text-white leading-[143%] font-medium bg-black rounded-sm hover:bg-gray-900"
-          >
-            Create new task
-          </Button>
-          {/* </form> */}
+          <CreateTaskModal boardId={board!.id} members={members.map(member => ({...member.user}))}/>
         </div>
       </div>
       <div className="mt-6 grid grid-cols-3 gap-6">

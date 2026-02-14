@@ -77,6 +77,6 @@ model Task {
   assigneeId String? @db.ObjectId
   assignee   User?   @relation("UserTasks", fields: [assigneeId], references: [id])
 
-  status    Columns   @default(TODO)
+  status    Columns?   @default(TODO)
   createdAt DateTime @default(now())
 }

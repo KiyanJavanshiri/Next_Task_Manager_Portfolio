@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState, useActionState } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import type { User } from "@/lib/generated/prisma/client";
+import type { MemberUser } from "@/utils/types";
 import { getUsers } from "@/utils/actions/user/getUsers";
 import { addMembers } from "@/utils/actions/board/addMembers";
 import { createPortal } from "react-dom";
@@ -10,16 +10,11 @@ import Button from "@/components/Button/Button";
 import SearchedUsersList from "./components/SearchedUsersList";
 import Image from "next/image";
 
-export type SearchedUsers = Omit<
-  User,
-  "createdAt" | "updatedAt" | "password" | "login"
->;
-
 const AddMemberModal = ({ boardId }: { boardId: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [users, setUsers] = useState<SearchedUsers[]>([]);
-  const [selectedUsers, setSelectedUsers] = useState<SearchedUsers[]>([]);
+  const [users, setUsers] = useState<MemberUser[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<MemberUser[]>([]);
   const [email, setEmail] = useState("");
   const [state, action] = useActionState(addMembers, undefined);
 
@@ -27,7 +22,7 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelectUser = (user: SearchedUsers) => {
+  const handleSelectUser = (user: MemberUser) => {
     setSelectedUsers((prev) => [...prev, user]);
     setEmail("");
   };

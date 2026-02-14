@@ -34,7 +34,7 @@ const AllTasksPage = async ({
   const { id } = await params;
 
   const board = await actionGetTasks(id);
-  const { title, tasks } = board!;
+  const { title, tasks, members } = board!;
 
   return (
     <section className="">
@@ -46,7 +46,7 @@ const AllTasksPage = async ({
           <Button className="">Board</Button>
         </div>
         <div className="flex justify-center items-center gap-x-4">
-          <AddMemberModal/>
+          <AddMemberModal boardId={board!.id} />
           {/* <form action={actionCreateTasks}> */}
           <Button
             type="submit"

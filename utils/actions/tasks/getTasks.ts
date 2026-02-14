@@ -7,7 +7,24 @@ export const actionGetTasks = async (boardId: string) => {
       id: boardId,
     },
     include: {
-      tasks: true,
+      tasks: {
+        include: {
+          assignee: true,
+        },
+      },
+      members: {
+        select: {
+          user: {
+            select: {
+              id: true,
+              email: true,
+              firstName: true,
+              lastName: true,
+              avatarUrl: true,
+            },
+          },
+        },
+      },
     },
   });
 

@@ -21,8 +21,10 @@ const SearchBar = () => {
     if (searchQuery) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setQuery(searchQuery);
+    } else {
+      setQuery("");
     }
-  }, [searchParams.get("board")]);
+  }, [searchParams]);
 
   return (
     <form

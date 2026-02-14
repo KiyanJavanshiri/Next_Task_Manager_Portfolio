@@ -1,13 +1,24 @@
 "use server";
 import prisma from "@/lib/prisma";
 
-export const getUsers = async (email: string) => {
+export const getUsers = async (email: string, boardId: string) => {
   const users = await prisma.user.findMany({
     where: {
-      email: {
-        contains: email,
-        mode: "insensitive",
-      },
+      AND: [
+        {
+          email: {
+            contains: email,
+            mode: "insensitive",
+          },
+        },
+        {
+          memberIn: {
+            none: {
+              boardId,
+            },
+          },
+        },
+      ],
     },
     take: 5,
     select: {

@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useActionState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import type { User } from "@/lib/generated/prisma/client";
 import { getUsers } from "@/utils/actions/user/getUsers";
+import { addMembers } from "@/utils/actions/board/addMembers";
 import { createPortal } from "react-dom";
 import { MdGroupAdd } from "react-icons/md";
 import Button from "@/components/Button/Button";
@@ -14,12 +15,13 @@ export type SearchedUsers = Omit<
   "createdAt" | "updatedAt" | "password" | "login"
 >;
 
-const AddMemberModal = () => {
+const AddMemberModal = ({ boardId }: { boardId: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState<SearchedUsers[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<SearchedUsers[]>([]);
   const [email, setEmail] = useState("");
+  const [state, action] = useActionState(addMembers, undefined);
 
   const handleOpenModal = () => {
     setIsOpen(!isOpen);
@@ -27,6 +29,7 @@ const AddMemberModal = () => {
 
   const handleSelectUser = (user: SearchedUsers) => {
     setSelectedUsers((prev) => [...prev, user]);
+    setEmail("");
   };
 
   const handleChangeQuery = useDebouncedCallback(async (email: string) => {
@@ -36,17 +39,25 @@ const AddMemberModal = () => {
     }
     setIsLoading(true);
 
-    const users = await getUsers(email.trim());
-    const filteredUsers = users.filter((user) => !selectedUsers.some((u) => u.id === user.id));
+    const users = await getUsers(email.trim(), boardId);
+    const filteredUsers = users.filter(
+      (user) => !selectedUsers.some((u) => u.id === user.id),
+    );
     setUsers(filteredUsers);
 
     setIsLoading(false);
   }, 500);
 
-
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
+
+  useEffect(() => {
+    if (state?.success) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsOpen(false);
+    }
+  }, [state]);
 
   return (
     <>
@@ -134,8 +145,18 @@ const AddMemberModal = () => {
                       )}
                     </div>
                   </div>
-                  <form>
+                  <form action={action}>
+                    {selectedUsers.map((u) => (
+                      <input
+                        key={u.id}
+                        type="hidden"
+                        name="userIds"
+                        value={u.id}
+                      />
+                    ))}
+                    <input type="hidden" name="boardId" value={boardId} />
                     <Button
+                      type="submit"
                       className="inline-block px-3 py-2 rounded-sm leading-[143%] text-sm text-white bg-black font-medium disabled:bg-gray-300"
                       disabled={selectedUsers.length === 0}
                     >

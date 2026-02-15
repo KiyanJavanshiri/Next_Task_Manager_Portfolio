@@ -1,14 +1,26 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useActionState } from "react";
 import { createPortal } from "react-dom";
 import { MemberUser } from "@/utils/types";
+import { actionCreateTasks } from "@/utils/actions/tasks/createTasks";
 import { MdOutlineClose } from "react-icons/md";
 import Button from "@/components/Button/Button";
 import FormInput from "@/components/Input/FormInput";
 import SelectAssignee from "./components/SelectAssignee";
 
-const CreateTaskModal = ({ boardId, members }: { boardId: string, members: MemberUser[] }) => {
+const CreateTaskModal = ({
+  boardId,
+  members,
+}: {
+  boardId: string;
+  members: MemberUser[];
+}) => {
+  const [state, action, isPending] = useActionState(
+    actionCreateTasks,
+    undefined,
+  );
   const [isOpen, setIsOpen] = useState(false);
+
   const handleCloseModal = () => {
     setIsOpen(!isOpen);
   };
@@ -17,11 +29,18 @@ const CreateTaskModal = ({ boardId, members }: { boardId: string, members: Membe
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
+  useEffect(() => {
+    if (state?.success) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsOpen(false);
+    }
+  }, [state]);
+
   return (
     <>
       <Button
         onClick={handleCloseModal}
-        className="px-4 py-2 inline-block text-base text-white leading-[143%] font-medium bg-black rounded-sm hover:bg-gray-900"
+        className="px-6 py-2 inline-block text-base text-white leading-[143%] font-medium bg-black rounded-sm hover:bg-gray-900"
       >
         Create new task
       </Button>
@@ -32,7 +51,7 @@ const CreateTaskModal = ({ boardId, members }: { boardId: string, members: Membe
             onClick={handleCloseModal}
           >
             <div
-              className="absolute top-1/3 left-1/2 -translate-x-1/2 p-4 rounded-md bg-white min-w-120"
+              className="absolute top-1/2 left-1/2 -translate-1/2 p-4 rounded-md bg-white min-w-120"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-6">
@@ -43,7 +62,12 @@ const CreateTaskModal = ({ boardId, members }: { boardId: string, members: Membe
                   <MdOutlineClose className="w-5 h-5" />
                 </Button>
               </div>
-              <form className="flex flex-col gap-y-4">
+              {state && !state.success && (
+                <p className="p-2 rounded-sm bg-white shadow-[0_0_10px_rgba(0,0,0,10%)] text-sm leading-[143%] font-medium text-red-500 mb-2 text-center">
+                  {state.message}
+                </p>
+              )}
+              <form action={action} className="flex flex-col gap-y-4">
                 <FormInput
                   label="Title"
                   placeholder="Enter title"
@@ -56,12 +80,26 @@ const CreateTaskModal = ({ boardId, members }: { boardId: string, members: Membe
                   id="description"
                   name="description"
                 />
-                <SelectAssignee label="Assignee" name="assignee" options={members}/>
-                <input type="hidden" value={boardId} />
-                <div className="">
-                  <Button className="">Cancel</Button>
-                  <Button type="submit" className="">
-                    Create
+                <SelectAssignee
+                  label="Assignee"
+                  name="assigneeId"
+                  members={members}
+                />
+                <input type="hidden" value={boardId} name="boardId" />
+                <div className="flex justify-end items-center gap-x-4">
+                  <Button
+                    onClick={() => setIsOpen(false)}
+                    disabled={isPending}
+                    className="px-4 py-2 rounded-md border border-gray-300 text-black leading-[143%] font-medium text-base"
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    disabled={isPending}
+                    type="submit"
+                    className="px-4 py-2 rounded-md border border-gray-300 bg-black text-white leading-[143%] font-medium text-base"
+                  >
+                    {isPending ? "Creating..." : "Create"}
                   </Button>
                 </div>
               </form>

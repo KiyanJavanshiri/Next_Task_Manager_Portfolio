@@ -1,3 +1,5 @@
+"use client";
+import { useDroppable } from "@dnd-kit/core";
 import type { Task } from "@/lib/generated/prisma/client";
 import type { IColumn } from "@/utils/types";
 import TaskItem from "./TaskItem";
@@ -8,8 +10,12 @@ const TaskBoardColumn = (props: { tasks: Task[]; column: IColumn }) => {
     column: { title, Icon, status },
   } = props;
 
+  const { setNodeRef } = useDroppable({
+    id: status,
+  });
+
   return (
-    <div className="p-4 rounded-md bg-gray-100">
+    <div ref={setNodeRef} className="p-4 rounded-md bg-gray-100">
       <div className="flex justify-start items-center gap-x-3">
         <Icon />
         <p className="text-sm leading-[143%] text-black font-medium">{title}</p>
@@ -19,13 +25,11 @@ const TaskBoardColumn = (props: { tasks: Task[]; column: IColumn }) => {
           </span>
         </div>
       </div>
-      <ul className="mt-3 flex flex-col gap-y-4">
+      <div className="mt-3 flex flex-col gap-y-4">
         {tasks.map((task) => (
-          <li key={task.id}>
-            <TaskItem task={task} />
-          </li>
+          <TaskItem key={task.id} task={task} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

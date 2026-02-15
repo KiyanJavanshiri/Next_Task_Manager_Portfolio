@@ -1,31 +1,8 @@
-import type { IColumn } from "@/utils/types";
-import { Columns } from "@/lib/generated/prisma/enums";
-import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
-import { LuLoader } from "react-icons/lu";
 import { actionGetTasks } from "@/utils/actions/tasks/getTasks";
-import { actionCreateTasks } from "@/utils/actions/tasks/createTasks";
 import Button from "@/components/Button/Button";
-import TaskBoardColumn from "@/components/Tasks/TaskBoardColumn";
 import AddMemberModal from "@/compositions/AddMemberModal/AddMemberModal";
 import CreateTaskModal from "@/compositions/CreateTaskModal/CreateTaskModal";
-
-const COLUMNS: IColumn[] = [
-  {
-    title: "To-do",
-    Icon: FaRegCircle,
-    status: Columns.TODO,
-  },
-  {
-    title: "In progress",
-    Icon: LuLoader,
-    status: Columns.IN_PROGRESS,
-  },
-  {
-    title: "Done",
-    Icon: FaRegCheckCircle,
-    status: Columns.DONE,
-  },
-];
+import ColumnsContainer from "@/compositions/ColumnsContainer";
 
 const AllTasksPage = async ({
   params,
@@ -48,18 +25,13 @@ const AllTasksPage = async ({
         </div>
         <div className="flex justify-center items-center gap-x-4">
           <AddMemberModal boardId={board!.id} />
-          <CreateTaskModal boardId={board!.id} members={members.map(member => ({...member.user}))}/>
+          <CreateTaskModal
+            boardId={board!.id}
+            members={members.map((member) => ({ ...member.user }))}
+          />
         </div>
       </div>
-      <div className="mt-6 grid grid-cols-3 gap-6">
-        {COLUMNS.map((column, i) => (
-          <TaskBoardColumn
-            key={i}
-            column={column}
-            tasks={tasks.filter((task) => task.status === column.status)}
-          />
-        ))}
-      </div>
+      <ColumnsContainer tasks={tasks} boardId={board!.id} />
     </section>
   );
 };

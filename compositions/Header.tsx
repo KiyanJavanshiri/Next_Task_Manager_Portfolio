@@ -28,14 +28,17 @@ const Header = ({ user }: { user: MemberUser }) => {
                 <MdNotificationsNone className="w-6 h-6" />
               </Button>
             </form>
-            <Link href={"/profile"} className="relative">
+            <Link
+              href={"/profile"}
+              className="w-6 h-6 rounded-full overflow-hidden shrink-0"
+            >
               {/* <RxAvatar className="w-6 h-6" /> */}
               <Image
                 src={user.avatarUrl || "/images/no-avatar.png"}
                 alt={`${user.firstName} avatar`}
                 width={24}
                 height={24}
-                className="rounded-full object-cover"
+                className="w-full h-full object-cover"
               />
             </Link>
           </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, type HTMLInputTypeAttribute } from "react";
+import { useState, type HTMLInputTypeAttribute } from "react";
 import Button from "../Button/Button";
 import { LuEye, LuEyeClosed } from "react-icons/lu";
 

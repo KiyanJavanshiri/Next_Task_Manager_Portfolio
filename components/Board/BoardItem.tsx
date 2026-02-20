@@ -26,14 +26,14 @@ const BoardItem = ({
           </p>
           <div className="flex justify-start items-center">
             {members.slice(0, 3).map(({ id, user }) => (
-              <div key={id} className="relative not-first:-ml-2">
+              <div key={id} className="w-8 h-8 shrink-0 overflow-hidden border border-gray-400 rounded-full relative not-first:-ml-2">
                 <Image
                   src={user.avatarUrl || "/images/no-avatar.png"}
                   alt="avatar member"
                   width={32}
                   height={32}
                   priority
-                  className="rounded-full border border-gray-400"
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}

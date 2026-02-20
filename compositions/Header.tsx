@@ -1,13 +1,18 @@
+"use client";
+import { MemberUser } from "@/utils/types";
 import { MdNotificationsNone } from "react-icons/md";
+import { useAuthContext } from "@/context/AuthContext";
 import { RxAvatar } from "react-icons/rx";
 import Image from "next/image";
+import Link from "next/link";
 import Button from "@/components/Button/Button";
 import BurgerMenu from "./BurgerMenu";
 import Logo from "@/components/Logo";
 import InnerContainer from "@/layout/InnerContainer";
 import SearchBar from "@/components/SearchBar";
 
-const Header = () => {
+const Header = ({ user }: { user: MemberUser }) => {
+  // const { user } = useAuthContext();
   return (
     <header className="py-2.5 bg-gray-100 border-b border-gray-200">
       <InnerContainer>
@@ -23,9 +28,16 @@ const Header = () => {
                 <MdNotificationsNone className="w-6 h-6" />
               </Button>
             </form>
-            <div className="">
-              <RxAvatar className="w-6 h-6" />
-            </div>
+            <Link href={"/profile"} className="relative">
+              {/* <RxAvatar className="w-6 h-6" /> */}
+              <Image
+                src={user.avatarUrl || "/images/no-avatar.png"}
+                alt={`${user.firstName} avatar`}
+                width={24}
+                height={24}
+                className="rounded-full object-cover"
+              />
+            </Link>
           </div>
         </div>
       </InnerContainer>

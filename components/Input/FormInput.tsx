@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import { LuEye, LuEyeClosed } from "react-icons/lu";
 
 interface FormInputProps<T> {
+  defaultValue?: string;
   placeholder: string;
   name: keyof T;
   id: string;
@@ -15,11 +16,19 @@ interface FormInputProps<T> {
 const FormInput = <T extends Record<string, string>>(
   props: FormInputProps<T>,
 ) => {
-  const { placeholder, name, id, label, error, type = "text" } = props;
+  const {
+    placeholder,
+    name,
+    id,
+    label,
+    error,
+    type = "text",
+    defaultValue,
+  } = props;
   const [isVisible, setIsVisible] = useState(false);
 
   return (
-    <fieldset>
+    <fieldset className="w-full">
       <label htmlFor={id} className="">
         <p className="text-left mb-2 text-[14px] leading-[143%] text-black font-medium">
           {label}
@@ -31,6 +40,7 @@ const FormInput = <T extends Record<string, string>>(
             name={name as string}
             id={id}
             type={type === "password" ? (isVisible ? "text" : type) : type}
+            defaultValue={defaultValue}
           />
           {type === "password" && (
             <Button

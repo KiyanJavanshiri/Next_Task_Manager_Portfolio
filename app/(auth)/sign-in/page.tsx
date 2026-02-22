@@ -31,7 +31,7 @@ const SignInPage = () => {
         action={action}
         className="text-center p-6 rounded-[10px] bg-white border border-gray-200 min-w-86 dark:bg-gray-800 dark:border-gray-700"
       >
-        <h2 className="text-[18px] leading-[143%] font-semibold mb-1 dark:text-white">
+        <h2 className="text-[18px] text-black leading-[143%] font-semibold mb-1 dark:text-white">
           Sign In
         </h2>
         <p className="text-sm leading-[143%] font-normal text-gray-500 dark:text-gray-300">

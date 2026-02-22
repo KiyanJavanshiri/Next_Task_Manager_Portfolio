@@ -1,30 +1,25 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { MdSunny } from "react-icons/md";
 import { FaMoon } from "react-icons/fa";
 
-type Theme = "light" | "dark";
-
 const ThemeToggle = () => {
-  const [theme, setTheme] = useState<Theme>("light");
-
-  useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    if (theme) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTheme(theme as Theme);
-    }
-    document.documentElement.classList.toggle("dark", theme === "dark");
-}, []);
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const toggleDarkMode = () => {
-    setTheme((prev) => {
-      const nextTheme = prev === "light" ? "dark" : "light";
-      localStorage.setItem("theme", nextTheme);
-      document.documentElement.classList.toggle("dark", nextTheme === "dark");
-      return nextTheme
-    });
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div
@@ -34,12 +29,12 @@ const ThemeToggle = () => {
       <div
         className={`absolute top-1/2 left-1/2 -translate-1/2 transition-all duration-250 ease-in-out ${theme === "dark" ? "opacity-0 rotate-180" : "opacity-100 rotate-0"}`}
       >
-        <MdSunny />
+        <MdSunny className="text-black" />
       </div>
       <div
         className={`absolute top-1/2 left-1/2 -translate-1/2 transition-all duration-250 ease-in-out ${theme === "light" ? "opacity-0 rotate-0" : "opacity-100 -rotate-360"}`}
       >
-        <FaMoon />
+        <FaMoon className="text-black" />
       </div>
     </div>
   );

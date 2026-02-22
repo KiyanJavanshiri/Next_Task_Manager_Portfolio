@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Providers from "@/providers/Providers";
 import "./styles.css";
 
 const inter = Inter({
@@ -18,10 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} antialiased bg-gray-50 dark:bg-gray-900`}>
-        {children}
-        <div id="modals"></div>
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${inter.variable} antialiased bg-gray-50 dark:bg-gray-900`}
+      >
+        <Providers>
+          {children}
+          <div id="modals"></div>
+        </Providers>
       </body>
     </html>
   );

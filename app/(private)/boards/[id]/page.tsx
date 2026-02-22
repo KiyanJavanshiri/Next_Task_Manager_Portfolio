@@ -23,18 +23,17 @@ const AllTasksPage = async ({
         </h2>
         <div className="flex justify-end items-center gap-x-4">
           <ul className="flex items-center">
-            <li>
-              {members.slice(0, 4).map(({ user: member }, i, arr) => {
-                const lastIndex = arr.length - 1;
-                if (arr.length >= 4 && i === lastIndex) {
-                  return <span key={i}>{arr.length - 3}</span>;
-                }
+            {members.slice(0, 4).map(({ user: member }, i, arr) => {
+              const lastIndex = arr.length - 1;
+              if (arr.length >= 4 && i === lastIndex) {
+                return <span key={i}>{arr.length - 3}</span>;
+              }
 
-                return (
-                  <div
-                    key={member.id}
-                    className="w-9 h-9 rounded-full overflow-hidden not-first:-ml-2"
-                  >
+              return (
+                <li
+                  key={member.id}
+                  className="w-9 h-9 rounded-full overflow-hidden not-first:-ml-2"
+                >
                     <Image
                       src={member.avatarUrl || "/images/no-avatar.png"}
                       alt={`${member.firstName} avatar`}
@@ -43,10 +42,10 @@ const AllTasksPage = async ({
                       priority
                       className="w-full h-full object-cover"
                     />
-                  </div>
-                );
-              })}
-            </li>
+
+                </li>
+              );
+            })}
           </ul>
           <AddMemberModal boardId={board!.id} />
           <CreateTaskModal

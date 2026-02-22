@@ -24,6 +24,7 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
 
   const handleSelectUser = (user: MemberUser) => {
     setSelectedUsers((prev) => [...prev, user]);
+    setUsers([]);
     setEmail("");
   };
 

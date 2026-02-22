@@ -30,12 +30,12 @@ const FormInput = <T extends Record<string, string>>(
   return (
     <fieldset className="w-full">
       <label htmlFor={id} className="">
-        <p className="text-left mb-2 text-[14px] leading-[143%] text-black font-medium">
+        <p className="text-left mb-2 text-[14px] leading-[143%] text-black font-medium dark:text-white">
           {label}
         </p>
         <div className="relative">
           <input
-            className="w-full px-4 py-3 rounded-[10px] border border-gray-200 bg-white outline-none text-[14px] leading-[143%] text-black font-normal placeholder:text-gray-500 focus:border-black focus:shadow-[0_0_10px_rgba(0,0,0,5%)]"
+            className="w-full px-4 py-3 rounded-[10px] border border-gray-200 bg-white outline-none text-[14px] leading-[143%] text-black font-normal placeholder:text-gray-500 focus:border-black focus:shadow-[0_0_10px_rgba(0,0,0,5%)] dark:border-gray-700 dark:bg-gray-700 dark:text-gray-100 dark:placeholder:text-gray-400 dark:focus:border-gray-300 dark:focus:shadow-[0_0_10px_rgba(255,255,255,5%)]"
             placeholder={placeholder}
             name={name as string}
             id={id}
@@ -53,14 +53,14 @@ const FormInput = <T extends Record<string, string>>(
                     isVisible ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  <LuEye />
+                  <LuEye className="dark:text-white" />
                 </div>
                 <div
                   className={`absolute top-1/2 left-1/2 -translate-1/2 transition-opacity duration-150 ${
                     !isVisible ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  <LuEyeClosed />
+                  <LuEyeClosed className="dark:text-white" />
                 </div>
               </div>
             </Button>

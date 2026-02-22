@@ -15,18 +15,18 @@ const BoardItem = ({
   const date = formattedDate(createdAt);
   const isOwner = board.ownerId === userId;
   return (
-    <div className="block p-4 rounded-sm bg-white border border-gray-300 transition-shadow duration-75 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,10%)]">
+    <div className="block p-4 rounded-sm bg-white border border-gray-300 transition-shadow duration-75 ease-in-out hover:shadow-[0_0_10px_rgba(0,0,0,10%)] dark:bg-gray-800 dark:border-gray-700 dark:hover:shadow-[0_0_10px_rgba(255,255,255,10%)]">
       <Link href={`/boards/${id}`}>
-        <h3 className="text-[18px] md:text-base text-black font-medium leading-[143%] mb-2 md:mb-3">
+        <h3 className="text-[18px] md:text-base text-black font-medium leading-[143%] mb-2 md:mb-3 dark:text-white">
           {title}
         </h3>
         <div className="flex justify-between items-center gap-x-2 mb-3">
-          <p className="leading-[143%] text-black text-base font-normal tracking-wide">
+          <p className="leading-[143%] text-black dark:text-gray-100 text-base font-normal tracking-wide">
             {tasks.length} tasks | {members.length} members
           </p>
           <div className="flex justify-start items-center">
             {members.slice(0, 3).map(({ id, user }) => (
-              <div key={id} className="w-8 h-8 shrink-0 overflow-hidden border border-gray-400 rounded-full relative not-first:-ml-2">
+              <div key={id} className="w-8 h-8 shrink-0 overflow-hidden border border-gray-400 dark:border-gray-600 rounded-full relative not-first:-ml-2">
                 <Image
                   src={user.avatarUrl || "/images/no-avatar.png"}
                   alt="avatar member"
@@ -41,7 +41,7 @@ const BoardItem = ({
         </div>
       </Link>
       <div className="flex justify-between items-center">
-        <p className="font-normal text-gray-400 leading-[143%] text-sm">
+        <p className="font-normal text-gray-400 dark:text-gray-500 leading-[143%] text-sm">
           {date.month} {date.day}, {date.year}
         </p>
         <DeleteBoardButton

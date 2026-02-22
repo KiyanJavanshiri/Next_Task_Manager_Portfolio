@@ -20,10 +20,10 @@ const DeleteBoardButton = ({
       className="relative group"
     >
       <Button type="submit" className="">
-        {isOwner ? <MdDelete /> : <MdOutlineLogout />}
+        {isOwner ? <MdDelete className="dark:text-white" /> : <MdOutlineLogout className="dark:text-white" />}
       </Button>
-      <div className="absolute bottom-[120%] left-1/2 -translate-x-1/2 px-3 py-2 text-xs text-white bg-[rgba(20,20,25,0.9)] rounded-sm shadow-xl backdrop-blur opacity-0 scale-95 translate-y-1 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 transition-all duration-200 pointer-events-none">
-        <p className="text-sm leading-[143%] text-white font-normal whitespace-nowrap">
+      <div className="absolute bottom-[120%] left-1/2 -translate-x-1/2 px-3 py-2 text-xs text-white bg-[rgba(20,20,25,0.9)] dark:bg-[rgba(240,240,245,0.9)] rounded-sm shadow-xl backdrop-blur opacity-0 scale-95 translate-y-1 group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 transition-all duration-200 pointer-events-none">
+        <p className="text-sm leading-[143%] text-white dark:text-gray-900 font-normal whitespace-nowrap">
           {isOwner ? "Delete the board" : "Leave from the board"}
         </p>
       </div>

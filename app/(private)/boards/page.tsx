@@ -12,8 +12,8 @@ const BoardsPage = async ({
 
   return (
     <section>
-      <div className="pb-4 border-b border-b-gray-300 flex justify-between items-center">
-        <h1 className="text-2xl font-semibold text-black leading-[143%]">
+      <div className="pb-4 border-b border-b-gray-300 dark:border-b-gray-600 flex justify-between items-center">
+        <h1 className="text-2xl font-semibold text-black dark:text-white leading-[143%]">
           My Boards
         </h1>
         <BoardCreateModal/>

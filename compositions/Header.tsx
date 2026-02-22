@@ -1,20 +1,16 @@
 "use client";
 import { MemberUser } from "@/utils/types";
-import { MdNotificationsNone } from "react-icons/md";
-import { useAuthContext } from "@/context/AuthContext";
-import { RxAvatar } from "react-icons/rx";
 import Image from "next/image";
 import Link from "next/link";
-import Button from "@/components/Button/Button";
 import BurgerMenu from "./BurgerMenu";
 import Logo from "@/components/Logo";
 import InnerContainer from "@/layout/InnerContainer";
 import SearchBar from "@/components/SearchBar";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Header = ({ user }: { user: MemberUser }) => {
-  // const { user } = useAuthContext();
   return (
-    <header className="py-2.5 fixed left-0 right-0 top-0 z-10 bg-gray-100 border-b border-gray-200">
+    <header className="py-2.5 fixed left-0 right-0 top-0 z-10 bg-gray-100 border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
       <InnerContainer>
         <div className="flex justify-between items-center">
           <SearchBar />
@@ -23,21 +19,16 @@ const Header = ({ user }: { user: MemberUser }) => {
             <Logo />
           </div>
           <div className="flex justify-between items-center gap-x-4">
-            <form className="hidden lg:flex justify-center items-center">
-              <Button className="">
-                <MdNotificationsNone className="w-6 h-6" />
-              </Button>
-            </form>
+            <ThemeToggle />
             <Link
               href={"/profile"}
-              className="w-6 h-6 rounded-full overflow-hidden shrink-0"
+              className="w-8 h-8 rounded-full overflow-hidden shrink-0"
             >
-              {/* <RxAvatar className="w-6 h-6" /> */}
               <Image
                 src={user.avatarUrl || "/images/no-avatar.png"}
                 alt={`${user.firstName} avatar`}
-                width={24}
-                height={24}
+                width={32}
+                height={32}
                 className="w-full h-full object-cover"
               />
             </Link>

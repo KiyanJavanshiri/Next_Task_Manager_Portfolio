@@ -29,12 +29,12 @@ const SignInPage = () => {
     <>
       <form
         action={action}
-        className="text-center p-6 rounded-[10px] bg-white border border-gray-200 min-w-86"
+        className="text-center p-6 rounded-[10px] bg-white border border-gray-200 min-w-86 dark:bg-gray-800 dark:border-gray-700"
       >
-        <h2 className="text-[18px] leading-[143%] font-semibold mb-1">
+        <h2 className="text-[18px] leading-[143%] font-semibold mb-1 dark:text-white">
           Sign In
         </h2>
-        <p className="text-sm leading-[143%] font-normal text-gray-500">
+        <p className="text-sm leading-[143%] font-normal text-gray-500 dark:text-gray-300">
           Enter your details to sign in
         </p>
         <div className="flex flex-col gap-y-4 mt-6">
@@ -56,16 +56,16 @@ const SignInPage = () => {
           />
           <Button
             type="submit"
-            className="p-2 mt-4 w-full rounded-[10px] bg-black text-center text-base text-white leading-[143%] font-medium disabled:bg-gray-600"
+            className="p-2 mt-4 w-full rounded-[10px] bg-black text-center text-base text-white leading-[143%] font-medium disabled:bg-gray-600 dark:bg-gray-100 dark:text-gray-900 dark:disabled:bg-gray-700 dark:disabled:text-gray-400"
             disabled={isPending}
           >
             {isPending ? "Submitting..." : "Sign In"}
           </Button>
         </div>
-        <p className="mt-4 text-sm leading-[143%] font-normal text-gray-400">
+        <p className="mt-4 text-sm leading-[143%] font-normal text-gray-400 dark:text-gray-400">
           Don&apos;t have an account yet?{" "}
           <Link
-            className="underline text-black font-semibold"
+            className="underline text-black font-semibold dark:text-white"
             href={"/sign-up"}
           >
             Sign Up

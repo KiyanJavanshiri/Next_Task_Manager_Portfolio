@@ -10,7 +10,7 @@ import Button from "@/components/Button/Button";
 const SideBar = () => {
   const pathname = usePathname();
   return (
-    <aside className="min-h-screen bg-white border-r border-r-gray-200 hidden lg:flex flex-col justify-between max-w-55 pb-4">
+    <aside className="min-h-screen fixed top-0 left-0 bottom-0 bg-white border-r border-r-gray-200 hidden lg:flex flex-col justify-between max-w-55 pb-4 z-20">
       <div className="">
         <div className="px-6 py-4 border-b border-gray-200">
           <Logo />

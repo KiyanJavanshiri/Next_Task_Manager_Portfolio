@@ -8,11 +8,11 @@ import InnerContainer from "@/layout/InnerContainer";
 const PrivateRootLayout = async ({ children }: { children: ReactNode }) => {
   const user = await getUser();
   return (
-    <div className="flex">
+    <div>
         <SideBar />
         <div className="flex flex-col flex-1">
           <Header user={user!} />
-          <main className="py-6 flex-1">
+          <main className="pb-6 py-24 flex-1">
             <InnerContainer>{children}</InnerContainer>
           </main>
           <footer></footer>

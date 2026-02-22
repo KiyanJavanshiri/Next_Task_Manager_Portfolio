@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, useActionState } from "react";
+import { useRouter } from 'next/navigation'
 import { createPortal } from "react-dom";
 import { MemberUser } from "@/utils/types";
 import { actionCreateTasks } from "@/utils/actions/tasks/createTasks";
@@ -15,6 +16,7 @@ const CreateTaskModal = ({
   boardId: string;
   members: MemberUser[];
 }) => {
+  const router = useRouter();
   const [state, action, isPending] = useActionState(
     actionCreateTasks,
     undefined,
@@ -47,11 +49,11 @@ const CreateTaskModal = ({
       {isOpen &&
         createPortal(
           <div
-            className="absolute inset-0 bg-[rgba(0,0,0,60%)]"
+            className="fixed inset-0 z-30 bg-[rgba(0,0,0,60%)]"
             onClick={handleCloseModal}
           >
             <div
-              className="absolute top-1/2 left-1/2 -translate-1/2 p-4 rounded-md bg-white min-w-120"
+              className="fixed top-1/2 left-1/2 -translate-1/2 p-4 rounded-md bg-white min-w-120"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-6">

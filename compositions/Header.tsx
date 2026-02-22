@@ -14,7 +14,7 @@ import SearchBar from "@/components/SearchBar";
 const Header = ({ user }: { user: MemberUser }) => {
   // const { user } = useAuthContext();
   return (
-    <header className="py-2.5 bg-gray-100 border-b border-gray-200">
+    <header className="py-2.5 fixed left-0 right-0 top-0 z-10 bg-gray-100 border-b border-gray-200">
       <InnerContainer>
         <div className="flex justify-between items-center">
           <SearchBar />

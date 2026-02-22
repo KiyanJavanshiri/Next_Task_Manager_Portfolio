@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import type { IColumn } from "@/utils/types";
 import { Columns } from "@/lib/generated/prisma/enums";
@@ -34,7 +34,7 @@ const ColumnsContainer = ({
   tasks: Task[];
   boardId: string;
 }) => {
-  const [alltasks, setAllTasks] = useState<Task[]>(tasks);
+  const [alltasks, setAllTasks] = useState<Task[]>(() => tasks);
 
   const handleDragEnd = async (event: DragEndEvent) => {
     const { active, over } = event;
@@ -55,12 +55,16 @@ const ColumnsContainer = ({
     await changeTaskStatus(taskId, boardId, newStatus);
   };
 
+  useEffect(() => {
+    setAllTasks(tasks);
+  }, [tasks]);
+
   return (
     <div className="mt-6 grid grid-cols-3 gap-6">
-      <DndContext onDragEnd={handleDragEnd}>
-        {COLUMNS.map((column, i) => (
+      <DndContext id="draggble-table" onDragEnd={handleDragEnd}>
+        {COLUMNS.map((column) => (
           <TaskBoardColumn
-            key={i}
+            key={column.status}
             column={column}
             tasks={alltasks.filter((task) => task.status === column.status)}
           />

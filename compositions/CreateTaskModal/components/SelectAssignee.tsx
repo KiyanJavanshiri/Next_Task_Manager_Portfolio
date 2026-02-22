@@ -31,14 +31,15 @@ const SelectAssignee = (props: ISelectAssigneeProps) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedUser ? (
-          <div className="flex justify-start gap-x-2">
-            <div className="">
+          <div className="flex justify-start items-center gap-x-2">
+            <div className="w-5 h-5 overflow-hidden rounded-full">
               <Image
                 src={selectedUser.avatarUrl || "/images/no-avatar.png"}
                 priority
                 width={20}
                 height={20}
                 alt={selectedUser.firstName}
+                className="w-full h-full object-cover"
               />
             </div>
             <p className="capitalize leading-[143%] text-sm font-normal text-black">

@@ -26,9 +26,11 @@ const TaskBoardColumn = (props: { tasks: Task[]; column: IColumn }) => {
         </div>
       </div>
       <div className="mt-3 flex flex-col gap-y-4">
-        {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} />
-        ))}
+        {tasks.length === 0 ? (
+          <p className="text-center mt-4 text-sm leading-[143%] text-gray-500 font-medium">No tasks here</p>
+        ) : (
+          tasks.map((task) => <TaskItem key={task.id} task={task} />)
+        )}
       </div>
     </div>
   );

@@ -66,11 +66,11 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
       {isOpen &&
         createPortal(
           <div
-            className="absolute inset-0 bg-[rgba(0,0,0,60%)]"
+            className="fixed inset-0 bg-[rgba(0,0,0,60%)] z-30"
             onClick={handleOpenModal}
           >
             <div
-              className="absolute top-1/3 left-1/2 -translate-x-1/2 p-4 rounded-md bg-white min-w-100"
+              className="fixed top-1/3 left-1/2 -translate-x-1/2 p-4 rounded-md bg-white min-w-100"
               onClick={(e) => e.stopPropagation()}
             >
               <div>

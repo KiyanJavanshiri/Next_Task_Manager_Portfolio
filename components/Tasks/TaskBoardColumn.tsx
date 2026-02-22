@@ -1,6 +1,6 @@
 "use client";
 import { useDroppable } from "@dnd-kit/core";
-import type { Task } from "@/lib/generated/prisma/client";
+import { TBoardTask as Task } from "@/utils/types";
 import type { IColumn } from "@/utils/types";
 import TaskItem from "./TaskItem";
 

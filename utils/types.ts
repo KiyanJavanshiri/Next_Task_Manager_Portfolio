@@ -1,5 +1,6 @@
 import { User } from "@/lib/generated/prisma/client";
 import { actionGetUsersBoards } from "./actions/user/userActions";
+import { actionGetTasks } from "./actions/tasks/getTasks";
 import { Columns } from "@/lib/generated/prisma/enums";
 import type { IconType } from "react-icons";
 
@@ -25,3 +26,7 @@ export type MemberUser = Omit<
   User,
   "createdAt" | "updatedAt" | "password" | "login"
 >;
+
+export type TBoardTask = NonNullable<
+  Awaited<ReturnType<typeof actionGetTasks>>
+>["tasks"][number];

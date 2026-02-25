@@ -9,6 +9,7 @@ export const actionCreateTasks = async (
   const data = Object.fromEntries(formData) as {
     boardId: string;
     title: string;
+    dueDate: string;
     description: string;
     assigneeId: string;
   };

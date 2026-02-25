@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState, useActionState } from "react";
-import { useRouter } from 'next/navigation'
 import { createPortal } from "react-dom";
 import { MemberUser } from "@/utils/types";
 import { actionCreateTasks } from "@/utils/actions/tasks/createTasks";
@@ -8,6 +7,7 @@ import { MdOutlineClose } from "react-icons/md";
 import Button from "@/components/Button/Button";
 import FormInput from "@/components/Input/FormInput";
 import SelectAssignee from "./components/SelectAssignee";
+import TaskDateCalendar from "./components/TaskDateCalendar";
 
 const CreateTaskModal = ({
   boardId,
@@ -16,7 +16,6 @@ const CreateTaskModal = ({
   boardId: string;
   members: MemberUser[];
 }) => {
-  const router = useRouter();
   const [state, action, isPending] = useActionState(
     actionCreateTasks,
     undefined,
@@ -82,6 +81,7 @@ const CreateTaskModal = ({
                   id="description"
                   name="description"
                 />
+                <TaskDateCalendar />
                 <SelectAssignee
                   label="Assignee"
                   name="assigneeId"

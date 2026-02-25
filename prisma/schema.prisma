@@ -78,5 +78,6 @@ model Task {
   assignee   User?   @relation("UserTasks", fields: [assigneeId], references: [id])
 
   status    Columns?   @default(TODO)
+  dueDate DateTime?
   createdAt DateTime @default(now())
 }

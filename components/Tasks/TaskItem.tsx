@@ -1,16 +1,17 @@
 "use client";
 import { useDraggable } from "@dnd-kit/core";
+import { formattedDate } from "@/utils/formattedDate";
 import { TBoardTask as Task } from "@/utils/types";
+import { FaRegFlag } from "react-icons/fa";
 import Image from "next/image";
 
 const TaskItem = ({ task }: { task: Task }) => {
-  const { setNodeRef, listeners, attributes, transform, isDragging } =
-    useDraggable({
-      id: task.id,
-      data: {
-        status: task.status,
-      },
-    });
+  const { setNodeRef, listeners, attributes, transform } = useDraggable({
+    id: task.id,
+    data: {
+      status: task.status,
+    },
+  });
 
   const style = transform
     ? {
@@ -19,6 +20,8 @@ const TaskItem = ({ task }: { task: Task }) => {
         rotate: "2deg",
       }
     : {};
+
+  const dueDate = task.dueDate ? formattedDate(task.dueDate) : null;
 
   return (
     <div
@@ -34,6 +37,14 @@ const TaskItem = ({ task }: { task: Task }) => {
       <p className="text-sm leading-[143%] font-normal text-gray-600">
         {task.description}
       </p>
+      {dueDate && (
+        <div className="flex justify-start items-center gap-x-1 mt-2">
+          <FaRegFlag className="text-gray-500 w-3 h-3" />
+          <span className="leading-[143%] text-gray-500 font-normal text-[12px]">
+            {dueDate.month} {dueDate.day} {dueDate.year}
+          </span>
+        </div>
+      )}
       <div className="flex justify-start items-center gap-x-4 mt-4 border-t border-t-gray-300 pt-3">
         <div className="w-8 h-8 rounded-full overflow-hidden">
           <Image

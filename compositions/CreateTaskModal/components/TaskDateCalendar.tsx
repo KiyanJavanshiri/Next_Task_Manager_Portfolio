@@ -1,12 +1,11 @@
 "use client";
 import { useState } from "react";
-import { startOfToday } from "date-fns";
 import { FaCalendarAlt } from "react-icons/fa";
 import Button from "@/components/Button/Button";
 import Calendar from "./Calendar";
 
 const TaskDateCalendar = () => {
-  const [selectedDate, setSelectedDate] = useState(startOfToday());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleCloseModal = () => {
@@ -36,11 +35,13 @@ const TaskDateCalendar = () => {
           selectedDate={selectedDate}
         />
       )}
-      <input
-        type="hidden"
-        name="dueDate"
-        value={selectedDate?.toISOString() || ""}
-      />
+      {selectedDate && (
+        <input
+          type="hidden"
+          name="dueDate"
+          value={selectedDate.toISOString() || ""}
+        />
+      )}
     </div>
   );
 };

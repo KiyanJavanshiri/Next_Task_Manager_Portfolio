@@ -4,10 +4,7 @@ import {
   startOfToday,
   isToday,
   startOfMonth,
-  endOfMonth,
-  endOfWeek,
   startOfWeek,
-  eachDayOfInterval,
   subMonths,
   addMonths,
   format,
@@ -35,7 +32,7 @@ const Calendar = ({
   handleSetDate,
   onClose,
 }: {
-  selectedDate: Date;
+  selectedDate: Date | null;
   handleSetDate: (date: Date) => void;
   onClose: () => void;
 }) => {
@@ -82,7 +79,7 @@ const Calendar = ({
           ))}
           {monthDays.map((day, i) => (
             <Button
-              className={`relative px-4 py-1 rounded-full flex justify-center items-center ${isEqual(day, selectedDate) ? "bg-black text-white hover:bg-gray-700" : "text-black bg-white hover:bg-gray-200"} ${
+              className={`relative px-4 py-1 rounded-full flex justify-center items-center ${selectedDate && isEqual(day, selectedDate) ? "bg-black text-white hover:bg-gray-700" : "text-black bg-white hover:bg-gray-200"} ${
                 i === 0 ? START_OF_COLUMN_CLASSES[getDay(day)] : ""
               } ${getMonth(day) !== getMonth(month) ? "text-gray-400" : ""}`}
               key={day.toString()}
@@ -92,7 +89,7 @@ const Calendar = ({
               }}
             >
               {format(day, "d")}
-              {isToday(day) && <div className={`absolute w-4 h-0.5 rounded-full ${isEqual(day, selectedDate) ? "bg-white" : "bg-black"} bottom-1 left-1/2 -translate-x-1/2`}></div>}
+              {isToday(day) && <div className={`absolute w-4 h-0.5 rounded-full ${selectedDate && isEqual(day, selectedDate) ? "bg-white" : "bg-black"} bottom-1 left-1/2 -translate-x-1/2`}></div>}
             </Button>
           ))}
         </div>

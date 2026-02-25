@@ -1,6 +1,5 @@
 "use server";
 import { ProfileFormState } from "@/compositions/ProfileEditForm";
-import { MemberUser } from "@/utils/types";
 import prisma from "@/lib/prisma";
 import { authScheme } from "@/utils/authValidation";
 import { revalidatePath } from "next/cache";
@@ -39,5 +38,5 @@ export const updateUser = async (
 
   revalidatePath("/profile");
 
-  return { ...state, success: true };
+  return { success:true };
 };

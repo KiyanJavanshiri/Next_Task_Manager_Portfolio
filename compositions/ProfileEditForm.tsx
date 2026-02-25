@@ -1,6 +1,7 @@
 "use client";
-import { useRef, useState, useActionState } from "react";
+import { useRef, useState, useMemo, useActionState, useEffect } from "react";
 import z from "zod";
+import { useRouter } from "next/navigation";
 import { authScheme } from "@/utils/authValidation";
 import { updateUser } from "@/utils/actions/user/updateUser";
 import { MemberUser } from "@/utils/types";
@@ -27,12 +28,16 @@ export type ProfileFormState =
 const ProfileEditForm = ({ user }: { user: MemberUser }) => {
   const [state, action, isPending] = useActionState(updateUser, undefined);
   const [isChanged, setIsChanged] = useState(false);
-  const initialData = {
-    firstName: user.firstName,
-    lastName: user.lastName,
-    email: user.email,
-    avatar: user.avatarUrl || "",
-  };
+  const router = useRouter();
+  const initialData = useMemo(
+    () => ({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      avatar: user.avatarUrl || "",
+    }),
+    [user],
+  );
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
@@ -56,6 +61,14 @@ const ProfileEditForm = ({ user }: { user: MemberUser }) => {
 
     setIsChanged(changed);
   };
+
+  useEffect(() => {
+    if (state?.success) {
+      router.refresh();
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsChanged(false)
+    }
+  }, [router, state]);
 
   return (
     <form

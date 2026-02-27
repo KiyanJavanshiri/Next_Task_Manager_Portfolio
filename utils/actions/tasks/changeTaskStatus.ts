@@ -1,5 +1,5 @@
 "use server";
-import { Columns } from "@/lib/generated/prisma/enums";
+import { Columns } from "@prisma/client";
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 

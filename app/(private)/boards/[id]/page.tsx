@@ -1,5 +1,4 @@
 import { actionGetTasks } from "@/utils/actions/tasks/getTasks";
-import Button from "@/components/Button/Button";
 import AddMemberModal from "@/compositions/AddMemberModal/AddMemberModal";
 import CreateTaskModal from "@/compositions/CreateTaskModal/CreateTaskModal";
 import ColumnsContainer from "@/compositions/ColumnsContainer";

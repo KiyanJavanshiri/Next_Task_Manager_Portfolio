@@ -1,5 +1,5 @@
 "use client";
-import React, { useActionState } from "react";
+import { useActionState } from "react";
 import z from "zod";
 import { authScheme } from "@/utils/authValidation";
 import { actionSignUpAuth } from "@/utils/actions/auth/auth";

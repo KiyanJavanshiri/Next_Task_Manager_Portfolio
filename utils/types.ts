@@ -1,7 +1,7 @@
-import { User } from "@/lib/generated/prisma/client";
+import { User } from "@prisma/client";
 import { actionGetUsersBoards } from "./actions/user/userActions";
 import { actionGetTasks } from "./actions/tasks/getTasks";
-import { Columns } from "@/lib/generated/prisma/enums";
+import { Columns } from "@prisma/client";
 import type { IconType } from "react-icons";
 
 export type BoardWithRelations = Awaited<

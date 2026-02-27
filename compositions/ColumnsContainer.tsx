@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import type { IColumn } from "@/utils/types";
 import { TBoardTask as Task } from "@/utils/types";
-import { Columns } from "@/lib/generated/prisma/enums";
+import { Columns } from "@prisma/client";
 import { changeTaskStatus } from "@/utils/actions/tasks/changeTaskStatus";
 import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 import { LuLoader } from "react-icons/lu";

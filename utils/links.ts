@@ -3,7 +3,6 @@ import {
   MdDashboard,
   MdOutlineSettings,
   MdNotificationsNone,
-  MdOutlineLogout,
 } from "react-icons/md";
 
 interface IPath {

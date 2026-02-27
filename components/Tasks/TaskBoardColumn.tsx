@@ -15,19 +15,19 @@ const TaskBoardColumn = (props: { tasks: Task[]; column: IColumn }) => {
   });
 
   return (
-    <div ref={setNodeRef} className="p-4 rounded-md bg-gray-100">
+    <div ref={setNodeRef} className="p-4 rounded-md bg-gray-100 dark:bg-gray-800">
       <div className="flex justify-start items-center gap-x-3">
         <Icon />
-        <p className="text-sm leading-[143%] text-black font-medium">{title}</p>
-        <div className="flex justify-center items-center w-4.5 h-4.5 rounded-full border border-gray-800">
-          <span className="text-[12px] leading-[143%] text-gray-500 font-medium">
+        <p className="text-sm leading-[143%] text-black font-medium dark:text-white ">{title}</p>
+        <div className="flex justify-center items-center w-4.5 h-4.5 rounded-full border border-gray-800 dark:border-gray-500 dark:bg-gray-800">
+          <span className="text-[12px] leading-[143%] text-gray-500 font-medium dark:text-gray-400">
             {tasks.length}
           </span>
         </div>
       </div>
       <div className="mt-3 flex flex-col gap-y-4">
         {tasks.length === 0 ? (
-          <p className="text-center mt-4 text-sm leading-[143%] text-gray-500 font-medium">No tasks here</p>
+          <p className="text-center mt-4 text-sm leading-[143%] text-gray-500 font-medium dark:text-gray-400">No tasks here</p>
         ) : (
           tasks.map((task) => <TaskItem key={task.id} task={task} />)
         )}

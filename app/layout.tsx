@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Task Manager",
-  description: "Task Manager created by me",
+  description: "Portfolio Task Manager created by me",
 };
 
 export default function RootLayout({

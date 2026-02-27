@@ -41,22 +41,22 @@ const CreateTaskModal = ({
     <>
       <Button
         onClick={handleCloseModal}
-        className="px-6 py-2 inline-block text-base text-white leading-[143%] font-medium bg-black rounded-sm hover:bg-gray-900"
+        className="px-6 py-2 inline-block text-base text-white leading-[143%] font-medium bg-black rounded-sm hover:bg-gray-900 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300"
       >
         Create new task
       </Button>
       {isOpen &&
         createPortal(
           <div
-            className="fixed inset-0 z-30 bg-[rgba(0,0,0,60%)]"
+            className="fixed inset-0 z-30 bg-[rgba(0,0,0,60%)] dark:bg-[rgba(0,0,0,70%)]"
             onClick={handleCloseModal}
           >
             <div
-              className="fixed top-1/2 left-1/2 -translate-1/2 p-4 rounded-md bg-white min-w-120"
+              className="fixed top-1/2 left-1/2 -translate-1/2 p-4 rounded-md bg-white min-w-120 dark:bg-gray-800 dark:border-gray-700"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-[20px] leading-[143%] text-black font-medium">
+                <h2 className="text-[20px] leading-[143%] text-black font-medium dark:text-white">
                   Create a task
                 </h2>
                 <Button onClick={handleCloseModal} className="">
@@ -64,7 +64,7 @@ const CreateTaskModal = ({
                 </Button>
               </div>
               {state && !state.success && (
-                <p className="p-2 rounded-sm bg-white shadow-[0_0_10px_rgba(0,0,0,10%)] text-sm leading-[143%] font-medium text-red-500 mb-2 text-center">
+                <p className="p-2 rounded-sm bg-white shadow-[0_0_10px_rgba(0,0,0,10%)] text-sm leading-[143%] font-medium text-red-500 mb-2 text-center dark:bg-red-900/30 dark:text-red-400 dark:border-red-800">
                   {state.message}
                 </p>
               )}
@@ -92,14 +92,14 @@ const CreateTaskModal = ({
                   <Button
                     onClick={() => setIsOpen(false)}
                     disabled={isPending}
-                    className="px-4 py-2 rounded-md border border-gray-300 text-black leading-[143%] font-medium text-base"
+                    className="px-4 py-2 rounded-md border border-gray-300 text-black leading-[143%] font-medium text-base dark:border-gray-600 dark:text-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600"
                   >
                     Cancel
                   </Button>
                   <Button
                     disabled={isPending}
                     type="submit"
-                    className="px-4 py-2 rounded-md border border-gray-300 bg-black text-white leading-[143%] font-medium text-base"
+                    className="px-4 py-2 rounded-md border border-gray-300 bg-black text-white leading-[143%] font-medium text-base dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300 dark:disabled:bg-gray-700 dark:disabled:text-gray-500"
                   >
                     {isPending ? "Creating..." : "Create"}
                   </Button>

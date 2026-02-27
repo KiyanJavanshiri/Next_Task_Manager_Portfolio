@@ -23,7 +23,7 @@ const BoardCreateModal = () => {
     <>
       <div className="relative">
         <Button
-          className="inline-block px-4 py-2 rounded-sm bg-black transition-colors duration-100 ease-in-out hover:bg-gray-800 text-base text-gray-300 font-medium leading-[143%]"
+          className="inline-block px-4 py-2 rounded-sm bg-black transition-colors duration-100 ease-in-out hover:bg-gray-800 text-base text-gray-300 font-medium leading-[143%] dark:bg-white dark:text-black dark:hover:bg-gray-300"
           onClick={() => setIsOpen(!isOpen)}
         >
           Create a board

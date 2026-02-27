@@ -16,7 +16,7 @@ const BoardsPage = async ({
         <h1 className="text-2xl font-semibold text-black dark:text-white leading-[143%]">
           My Boards
         </h1>
-        <BoardCreateModal/>
+        <BoardCreateModal />
       </div>
       <Suspense fallback={<BoardsLoading />}>
         <BoardContainer search={board || ""} />

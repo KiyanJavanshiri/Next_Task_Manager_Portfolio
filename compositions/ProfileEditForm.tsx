@@ -78,7 +78,7 @@ const ProfileEditForm = ({ user }: { user: MemberUser }) => {
       className="flex-1 flex flex-col gap-y-4"
     >
       <div className="">
-        <h3 className="text-sm leading-[143%] text-gray-500 font-medium">
+        <h3 className="text-sm leading-[143%] text-gray-500 dark:text-gray-400 font-medium">
           My picture
         </h3>
         <div className="mt-4 flex justify-start items-center gap-x-8">
@@ -130,7 +130,7 @@ const ProfileEditForm = ({ user }: { user: MemberUser }) => {
       <div className="flex justify-end mt-4">
         <Button
           type="submit"
-          className="inline-block px-4 py-2 rounded-sm leading-[143%] text-white bg-black font-medium disabled:bg-gray-400 disabled:cursor-not-allowed"
+          className="inline-block px-4 py-2 rounded-sm leading-[143%] text-white bg-black font-medium disabled:bg-gray-400 disabled:cursor-not-allowed dark:bg-gray-100 dark:text-gray-900 dark:disabled:bg-gray-700 dark:disabled:text-gray-500"
           disabled={!isChanged || isPending}
         >
           Save all changes

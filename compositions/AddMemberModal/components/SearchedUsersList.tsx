@@ -10,7 +10,7 @@ const SearchedUsersList = ({
   handleSelectUser: (user: MemberUser) => void;
 }) => {
   return (
-    <ul className="absolute top-full translate-y-2 left-0 right-0 rounded-sm shadow-[0_0_10px_rgba(0,0,0,10%)] p-4 max-h-50 overflow-y-auto flex flex-col gap-y-3 bg-white">
+    <ul className="absolute top-full translate-y-2 left-0 right-0 rounded-sm shadow-[0_0_10px_rgba(0,0,0,10%)] p-4 max-h-50 overflow-y-auto flex flex-col gap-y-3 bg-white dark:bg-gray-800 dark:border-gray-700 dark:shadow-[0_0_10px_rgba(255,255,255,5%)]">
       {users.map((user) => (
         <li key={user.id}>
             <SearchedUsersItem user={user} handleSelectUser={() => handleSelectUser(user)} />

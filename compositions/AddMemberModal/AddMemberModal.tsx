@@ -58,7 +58,7 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
   return (
     <>
       <Button
-        className="flex justify-center items-center gap-x-2 px-4 py-2 text-base border border-gray-300 transition-colors duration-100 ease-in-out text-black leading-[143%] font-medium bg-white rounded-sm hover:bg-black hover:text-white"
+        className="flex justify-center items-center gap-x-2 px-4 py-2 text-base border border-gray-300 transition-colors duration-100 ease-in-out text-black leading-[143%] font-medium bg-white rounded-sm hover:bg-black hover:text-white dark:border-gray-600 dark:text-white dark:bg-gray-800 dark:hover:bg-gray-100 dark:hover:text-gray-900"
         onClick={handleOpenModal}
       >
         <MdGroupAdd />
@@ -67,21 +67,21 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
       {isOpen &&
         createPortal(
           <div
-            className="fixed inset-0 bg-[rgba(0,0,0,60%)] z-30"
+            className="fixed inset-0 bg-[rgba(0,0,0,60%)] z-30 dark:bg-[rgba(0,0,0,70%)]"
             onClick={handleOpenModal}
           >
             <div
-              className="fixed top-1/3 left-1/2 -translate-x-1/2 p-4 rounded-md bg-white min-w-100"
+              className="fixed top-1/3 left-1/2 -translate-x-1/2 p-4 rounded-md bg-white min-w-100 dark:bg-gray-800 dark:border-gray-700"
               onClick={(e) => e.stopPropagation()}
             >
               <div>
-                <h2 className="text-[20px] leading-[143%] text-black font-medium mb-3">
+                <h2 className="text-[20px] leading-[143%] text-black font-medium mb-3 dark:text-white">
                   Add member
                 </h2>
                 <div className="relative">
                   <label
                     htmlFor="email"
-                    className="inline-block mb-2 text-base leading-[143%] text-black font-medium"
+                    className="inline-block mb-2 text-base leading-[143%] text-black font-medium dark:text-gray-100"
                   >
                     Enter users email
                   </label>
@@ -95,7 +95,7 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
                       }}
                       type="text"
                       placeholder="Enter user email..."
-                      className="text-base leading-[143%] w-full px-4 py-2 rounded-sm bg-white border border-gray-300 placeholder:text-gray-400 outline-none focus:border-black"
+                      className="text-base leading-[143%] w-full px-4 py-2 rounded-sm bg-white border border-gray-300 placeholder:text-gray-400 outline-none focus:border-black dark:bg-gray-700 dark:border-gray-600 dark:text-gray-100 dark:placeholder:text-gray-400 dark:focus:border-gray-300"
                     />
                     {isLoading && (
                       <div className="absolute top-1/2 right-4 -translate-y-1/2">
@@ -104,7 +104,7 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
                     )}
                   </div>
                   {email.length >= 2 && users.length === 0 && (
-                    <p className="mt-1 leading-[143%] font-normal text-sm text-gray-500">
+                    <p className="mt-1 leading-[143%] font-normal text-sm text-gray-500 dark:text-gray-400">
                       seems like no users found
                     </p>
                   )}
@@ -117,10 +117,10 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
                 </div>
                 <div className="mt-3 flex justify-between items-center">
                   <div className="flex">
-                    {selectedUsers.length === 0 && <p>no selected users yet</p>}
+                    {selectedUsers.length === 0 && <p className="text-gray-500 dark:text-gray-400">no selected users yet</p>}
                     <div className="flex justify-start items-center">
                       {selectedUsers.slice(0, 4).map((user) => (
-                        <div key={user.id} className="not-first:-ml-2">
+                        <div key={user.id} className="not-first:-ml-2 dark:border-gray-600">
                           <Image
                             src={user.avatarUrl || "/images/no-avatar.png"}
                             alt={user.firstName}
@@ -134,7 +134,7 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
                       {selectedUsers.length > 0 && (
                         <Button
                           onClick={() => setSelectedUsers([])}
-                          className="px-4 py-2 text-black leading-[143%] font-normal text-sm"
+                          className="px-4 py-2 text-black leading-[143%] font-normal text-sm dark:text-gray-100"
                         >
                           Reset
                         </Button>
@@ -153,7 +153,7 @@ const AddMemberModal = ({ boardId }: { boardId: string }) => {
                     <input type="hidden" name="boardId" value={boardId} />
                     <Button
                       type="submit"
-                      className="inline-block px-3 py-2 rounded-sm leading-[143%] text-sm text-white bg-black font-medium disabled:bg-gray-300"
+                      className="inline-block px-3 py-2 rounded-sm leading-[143%] text-sm text-white bg-black font-medium disabled:bg-gray-300 dark:bg-gray-100 dark:text-gray-900 dark:disabled:bg-gray-700 dark:disabled:text-gray-500"
                       disabled={selectedUsers.length === 0}
                     >
                       Add to members

@@ -17,8 +17,8 @@ const AllTasksPage = async ({
 
   return (
     <section className="">
-      <div className="mt-3 flex justify-between items-center gap-x-4 pb-4 border-b border-gray-300">
-        <h2 className="text-3xl leading-[143%] text-black font-semibold">
+      <div className="mt-3 flex justify-between items-center gap-x-4 pb-4 border-b border-gray-300 dark:border-gray-600">
+        <h2 className="text-3xl leading-[143%] text-black font-semibold dark:text-white">
           {title}
         </h2>
         <div className="flex justify-end items-center gap-x-4">
@@ -26,7 +26,7 @@ const AllTasksPage = async ({
             {members.slice(0, 4).map(({ user: member }, i, arr) => {
               const lastIndex = arr.length - 1;
               if (arr.length >= 4 && i === lastIndex) {
-                return <span key={i}>{arr.length - 3}</span>;
+                return <span key={i} className="text-black dark:text-gray-100 font-medium">+{arr.length - 3}</span>;
               }
 
               return (
